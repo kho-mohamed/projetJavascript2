@@ -1,0 +1,43 @@
+{
+  "name": "ecommerce_projet_js2",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2",
+    "vite": "^6.3.5"
+  },
+  "main": "vite.config.js",
+  "dependencies": {
+    "braces": "^3.0.3",
+    "chokidar": "^4.0.3",
+    "detect-libc": "^1.0.3",
+    "esbuild": "^0.25.5",
+    "fdir": "^6.4.5",
+    "fill-range": "^7.1.1",
+    "fsevents": "^2.3.3",
+    "immutable": "^5.1.3",
+    "is-extglob": "^2.1.1",
+    "is-glob": "^4.0.3",
+    "is-number": "^7.0.0",
+    "micromatch": "^4.0.8",
+    "nanoid": "^3.3.11",
+    "node-addon-api": "^7.1.1",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.2",
+    "postcss": "^8.5.4",
+    "readdirp": "^4.1.2",
+    "rollup": "^4.42.0",
+    "source-map-js": "^1.2.1",
+    "tinyglobby": "^0.2.14",
+    "to-regex-range": "^5.0.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

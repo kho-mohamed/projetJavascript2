@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="form.js"></script>
+    <title>Smartphooool</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <picture
+          ><a class="header-brand" href="/"
+            ><img
+              src="https://images.unsplash.com/vector-1742131266634-80c5ba824f9e?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="logo" /></a
+        ></picture>
+
+        <ul>
+          <li>
+            <a href="../index.html" class="nav-titre">Accueil</a>
+          </li>
+                    <li>
+            <a href="../galery/galery.html" class="nav-titre">Nos Produits</a>
+          </li>
+          <li>
+            <a href="./form.html" class="nav-titre active"
+              >Ajouter un produit</a
+            >
+          </li>
+          <li>
+            <a href="../connect/connection.html" class="nav-titre"
+              >Se connecter</a
+            >
+          </li>
+        </ul>
+      </header>
+      <div class="content">
+        <form class="form">
+          <h2 class="title-form">Page d'ajout de produit</h2>
+          <div class="form-group">
+            <label for="nom">Nom</label>
+            <input
+              type="text"
+              name="nom"
+              id="nom"
+              minlength="2"
+              maxlength="15"
+            />
+          </div>
+          <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="number" name="prix" id="prix" min="1" max="9999" />
+          </div>
+          <div class="form-group">
+            <label for="image">Lien d'image</label>
+            <input type="url" name="image" id="image" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description"></textarea>
+          </div>
+          <ul class="erreur-text" id="erreurs"></ul>
+          <div class="form-btn-container">
+            <button class="btn btn-secondary">Annuler</button>
+            <button class="btn btn-primary" type="submit">Sauvegarder</button>
+          </div>
+        </form>
+      </div>
+      <footer>
+        © Smartphooool est une marque local enregistré au Québec, tout droit
+        réservé.
+      </footer>
+    </div>
+  </body>
+</html>

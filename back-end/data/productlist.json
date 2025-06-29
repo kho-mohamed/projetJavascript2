@@ -1,0 +1,134 @@
+[
+  {
+    "_type": "Produit",
+    "nom": "iPhone 14",
+    "prix": "999 $",
+    "description": "Écran OLED 6,1\", puce A15 Bionic, double caméra avancée.",
+    "image": "https://images.unsplash.com/photo-1697898706719-bce6e007c817?w=900",
+    "stock": 12,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001001
+  },
+  {
+    "_type": "Produit",
+    "nom": "Samsung Galaxy S23",
+    "prix": "899 $",
+    "description": "Écran AMOLED 6,2\", Snapdragon 8 Gen 2, triple caméra.",
+    "image": "https://images.unsplash.com/photo-1675452937281-24485562bd84?w=900",
+    "stock": 8,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001002
+  },
+  {
+    "_type": "Produit",
+    "nom": "Google Pixel 7",
+    "prix": "799 $",
+    "description": "Écran OLED 6,3\", puce Google Tensor G2, caméra haut de gamme.",
+    "image": "https://images.unsplash.com/photo-1669888940542-bf597f76ef39?w=900",
+    "stock": 10,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001003
+  },
+  {
+    "_type": "Produit",
+    "nom": "OnePlus 11",
+    "prix": "749 $",
+    "description": "Écran AMOLED 6,7\", Snapdragon 8 Gen 2, triple caméra.",
+    "image": "https://images.unsplash.com/photo-1641815217625-cccb222225c1?w=900",
+    "stock": 7,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001004
+  },
+  {
+    "_type": "Produit",
+    "nom": "Xiaomi 13 Pro",
+    "prix": "899 $",
+    "description": "Écran AMOLED 6,73\", Snapdragon 8 Gen 2, triple caméra.",
+    "image": "https://images.unsplash.com/photo-1621691187532-bbeb671757ac?w=900",
+    "stock": 5,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001005
+  },
+  {
+    "_type": "Produit",
+    "nom": "Sony Xperia 1 IV",
+    "prix": "1299 $",
+    "description": "Écran OLED 4K 6,5\", Snapdragon 8 Gen 1, triple caméra.",
+    "image": "https://images.unsplash.com/photo-1621746073870-7fab828925e6?w=900",
+    "stock": 3,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001006
+  },
+  {
+    "_type": "Produit",
+    "nom": "Oppo Find X5 Pro",
+    "prix": "1099 $",
+    "description": "Écran AMOLED 6,7\", Snapdragon 8 Gen 1, triple caméra.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdPR7BTP-VXtCaVwhqUGBM9vXUQTgjmvjczA&s",
+    "stock": 6,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001007
+  },
+  {
+    "_type": "Produit",
+    "nom": "Motorola Edge 30 Pro",
+    "prix": "799 $",
+    "description": "Écran OLED 6,7\", Snapdragon 8 Gen 1, triple caméra.",
+    "image": "https://m.media-amazon.com/images/I/61ddgw-0CoL._UF894,1000_QL80_.jpg",
+    "stock": 9,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001008
+  },
+  {
+    "_type": "Produit",
+    "nom": "Asus ROG Phone 6",
+    "prix": "999 $",
+    "description": "Écran AMOLED 6,78\", Snapdragon 8+ Gen 1, caméra gaming.",
+    "image": "https://dlcdnwebimgs.asus.com/gain/FB338DAC-B312-4D25-A7A3-DBDBDBC123CA",
+    "stock": 4,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001009
+  },
+  {
+    "_type": "Produit",
+    "nom": "Vivo X80 Pro",
+    "prix": "1099 $",
+    "description": "Écran AMOLED 6,78\", Snapdragon 8 Gen 1, quadruple caméra.",
+    "image": "https://fdn.gsmarena.com/imgroot/news/22/05/vivo-x80-pro-ifr/-1200w5/gsmarena_002.jpg",
+    "stock": 3,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001010
+  },
+  {
+    "_type": "Produit",
+    "nom": "Huawei P50 Pro",
+    "prix": "899 $",
+    "description": "Écran OLED 6,6\", Kirin 9000, quadruple caméra.",
+    "image": "https://i.ebayimg.com/images/g/2dgAAOSwGJlhFf8T/s-l400.jpg",
+    "stock": 5,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001011
+  },
+  {
+    "_type": "Produit",
+    "nom": "Nokia G50",
+    "prix": "299 $",
+    "description": "Écran HD+ 6,82\", Snapdragon 480, batterie 5000 mAh.",
+    "image": "https://i0.wp.com/nokiapoweruser.com/wp-content/uploads/2021/09/Nokia-G50-5G-Blue-color-model.jpg?fit=1250%2C1561&ssl=1",
+    "stock": 20,
+    "estDisponible": true,
+    "dateCreation": "2025-06-27T21:00:00.000Z",
+    "id": 3001012
+  }
+]

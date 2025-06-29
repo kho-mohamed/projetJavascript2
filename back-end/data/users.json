@@ -1,0 +1,32 @@
+[
+  {
+    "_type": "User",
+    "id": 1,
+    "email": "moh@mail.com",
+    "password": "0102",
+    "nom": "moh ben mhamed",
+    "role": "admin",
+    "estActif": true,
+    "dateInscription": ""
+  },
+  {
+    "_type": "User",
+    "id": 2,
+    "email": "bounou@mol.com",
+    "password": "0102",
+    "nom": "bounou bounou",
+    "role": "operateur",
+    "estActif": true,
+    "dateInscription": ""
+  },
+  {
+    "_type": "User",
+    "id": 3,
+    "email": "bart@simpson.com",
+    "password": "0102",
+    "nom": "bart simpson",
+    "role": "client",
+    "estActif": true,
+    "dateInscription": ""
+  }
+]
