@@ -100,3 +100,17 @@ footer {
   width: 100%;
   overflow: hidden;
 }
+
+.carte-btns {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+}
+.carte-btn {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

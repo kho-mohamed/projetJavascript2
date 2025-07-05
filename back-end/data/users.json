@@ -28,5 +28,20 @@
     "role": "client",
     "estActif": true,
     "dateInscription": ""
+  },
+  {
+    "nom": "iphone 17",
+    "id": "0197bd7a-f9db-73cf-9c28-12a9004c852a",
+    "createdAt": "2025-06-29T20:57:22.655Z",
+    "updatedAt": "2025-06-29T20:57:22.656Z"
+  },
+  {
+    "login": "marianetest",
+    "email": "mariane@mail.com",
+    "password": "010203ab-",
+    "password2": "010203ab-",
+    "id": "0197bd7c-27b8-731a-b872-72caedbc6812",
+    "createdAt": "2025-06-29T20:58:39.930Z",
+    "updatedAt": "2025-06-29T20:58:39.930Z"
   }
 ]

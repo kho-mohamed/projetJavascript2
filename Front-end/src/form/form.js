@@ -1,10 +1,47 @@
 import "../assets/styles/styles.scss";
+import { env } from "../../config/env.js";
 
 // variables:
 
 const form = document.querySelector(".form");
 const baliseErreurs = document.querySelector("#erreurs");
+const btnAnnuler = document.querySelector(".btn-secondary");
+let produitId;
 let erreurs = [];
+
+const initialisationFormulaire = async () => {
+  const params = new URL(window.location.href);
+  produitId = params.searchParams.get("id");
+  if (produitId) {
+    // Si un id de produit est présent dans l'URL, on remplit le formulaire
+    // avec les données du produit correspondant.
+    if (produitId) {
+      const response = await fetch(`${env.BACKEND_PRODUCTS_URL}/${produitId}`);
+      if (response.status < 300) {
+        // Si la réponse est correcte, on transforme la réponse en JSON
+        // et on appelle la fonction pour remplir le formulaire.
+        // On utilise la fonction envoiFormulaire pour remplir le formulaire
+        // avec les données du produit.
+        const produit = await response.json();
+        envoiFormulaire(produit);
+      }
+    }
+  }
+};
+
+initialisationFormulaire();
+
+// Fonction pour remplir le formulaire avec les données du produit
+const envoiFormulaire = (produit) => {
+  const nomInput = document.querySelector("#nom");
+  const prixInput = document.querySelector("#prix");
+  const imageInput = document.querySelector("#image");
+  const descriptionInput = document.querySelector("#description");
+  nomInput.value = produit.nom || "";
+  prixInput.value = produit.prix || "";
+  imageInput.value = produit.image || "";
+  descriptionInput.value = produit.description || "";
+};
 
 // Écouteur d'événement pour le formulaire
 // Lorsque le formulaire est soumis, on empêche le comportement par défaut (rechargement de la page)
@@ -16,8 +53,35 @@ form.addEventListener("submit", async (event) => {
   const nouvelArticle = Object.fromEntries(dataFormulaire.entries());
 
   if (validationFormulaire(nouvelArticle)) {
-    const json = JSON.stringify(nouvelArticle);
-
+    try {
+      const json = JSON.stringify(nouvelArticle);
+      let response;
+      if (produitId) {
+        // Si un id de produit est présent dans l'URL, on met à jour le produit
+        response = await fetch(`${env.BACKEND_PRODUCTS_URL}/${produitId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: json,
+        });
+      } else {
+        // Si aucun id de produit n'est présent dans l'URL, on crée un nouveau produit
+        response = await fetch(`${env.BACKEND_PRODUCTS_URL}`, {
+          method: "POST",
+          body: json,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+      if (response.status < 300) {
+        // Si la réponse est correcte, on redirige vers la page des produits
+        window.location.assign("./produit.html");
+      }
+    } catch (error) {
+      console.log("ereur :", error);
+    }
   }
 });
 

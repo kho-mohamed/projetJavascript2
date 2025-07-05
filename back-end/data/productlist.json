@@ -130,5 +130,14 @@
     "estDisponible": true,
     "dateCreation": "2025-06-27T21:00:00.000Z",
     "id": 3001012
+  },
+  {
+    "nom": "s25",
+    "prix": "1300",
+    "image": "https://images.samsung.com/ca_fr/smartphones/galaxy-s25/buy/product_color_silverShadow_plus_PC.png",
+    "description": "lsqkdmljkqsdlkjqlsjkdq",
+    "id": "0197da99-8c80-770d-9f3c-2610cf4b538a",
+    "createdAt": "2025-07-05T12:39:45.541Z",
+    "updatedAt": "2025-07-05T12:39:45.541Z"
   }
 ]

@@ -3,7 +3,6 @@ import { products } from "../data/productlist.js";
 import { afficheProduit } from "./components/products/product.js";
 
 const contentIndex = document.querySelector("[id='indexcontent']");
-console.log(contentIndex);
 
 // Création d'une fiche aléatoire de produit par id:
 const produitid = [];
