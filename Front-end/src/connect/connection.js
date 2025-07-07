@@ -1,4 +1,5 @@
 import "../assets/styles/styles.scss";
+import { env } from "../../config/env.js";
 
 // variables:
 
@@ -17,6 +18,23 @@ form.addEventListener("submit", async (event) => {
 
   if (validationFormulaire(nvUtilisateur)) {
     const json = JSON.stringify(nvUtilisateur);
+    console.log("json :", json);
+    console.log(env.BACKEND_LOGIN_URL);
+    let response;
+    response = await fetch(`${env.BACKEND_LOGIN_URL}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: json,
+    });
+    if (response.status < 300) {
+      // Si la réponse est correcte, on transforme la réponse en JSON
+      // et on redirige l'utilisateur vers la page d'accueil.
+      const utilisateur = await response.json();
+      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+      window.location.assign("./index.html");
+    }
   }
 });
 

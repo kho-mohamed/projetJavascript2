@@ -55,6 +55,7 @@ form.addEventListener("submit", async (event) => {
   if (validationFormulaire(nouvelArticle)) {
     try {
       const json = JSON.stringify(nouvelArticle);
+      console.log("json :", json);
       let response;
       if (produitId) {
         // Si un id de produit est présent dans l'URL, on met à jour le produit

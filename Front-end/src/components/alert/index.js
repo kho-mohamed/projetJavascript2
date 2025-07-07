@@ -30,7 +30,7 @@ export class Alert {
     closeButton.addEventListener("click", fermer);
 
     // Fermer la boîte d'alerte après la durée spécifiée
-    if (duratiion > 0) {
+    if (duration > 0) {
       setTimeout(() => {
         if (document.body.contains(BoiteAlerte)) {
           fermer();
@@ -68,12 +68,12 @@ export class Alert {
       }, 10);
 
       // Ajouter des écouteurs d'événements pour les boutons de confirmation et d'annulation
-      const alerteBouttons = BoiteAlerte.querySelector(".alert-buttons");
+      const alerteBouttons = BoiteAlerte.querySelector(".alert-bouttons");
       alerteBouttons.addEventListener("click", (event) => {
         if (event.target.classList.contains("confirm")) {
-          fermeAlerte(true);
+          closeAlert(true);
         } else if (event.target.classList.contains("cancel")) {
-          fermeAlerte(false);
+          closeAlert(false);
         }
       });
 
