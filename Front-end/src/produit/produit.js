@@ -3,6 +3,9 @@ import { env } from "../../config/env.js";
 import { divSupprime } from "../components/divSupprime/index.js";
 import { Alert } from "../components/alert/index.js";
 
+const utilisateur = JSON.parse(localStorage.getItem("utilisateur"));
+const estAdmin = utilisateur && utilisateur.role === "admin";
+
 const content = document.querySelector("#gelerycontent");
 
 const afficheProduit = (objetProduits, container) => {
@@ -26,8 +29,25 @@ const elementProduit = (pdt) => {
             <h4 class="carte-prix">${pdt.prix} $</h4>
             <p class="carte-description">${pdt.description}</p>
             <div class="carte-btns">
-            <div data-id=${pdt.id} class="carte-btn carte-btn-supprimer"><img src="../assets/images/delete.svg">  </div>
-            <div class="carte-btn carte-btn-modifier" data-id=${pdt.id}><img src="../assets/images/edit.svg">  </div>
+            ${
+              estAdmin
+                ? `
+  <div class="carte-btn carte-btn-supprimer" data-id="${pdt.id}">
+    <img src="../assets/images/delete.svg">
+  </div>
+  <div class="carte-btn carte-btn-modifier" data-id="${pdt.id}">
+    <img src="../assets/images/edit.svg">
+  </div>
+`
+                : ""
+            } 
+<div class="carte-btn carte-btn-ajouter" data-id="${pdt.id}" data-nom="${
+    pdt.nom
+  }" data-prix="${pdt.prix}" data-image="${pdt.image}">
+  🛒
+</div>
+</div>
+            
             </div>
         </div>`;
   blocHtml.href = `./product.html?id=${pdt.id}`;
@@ -39,6 +59,9 @@ const ajouterEvenements = (container) => {
   const modifierBtn = container.querySelectorAll(".carte-btn-modifier");
   modifierBtn.forEach((boutton) => {
     boutton.addEventListener("click", (event) => {
+      if (!estAdmin) {
+        return Alert.attention("Seul un admin peut modifier un produit.");
+      }
       const target = event.currentTarget;
       const productId = target.dataset.id;
       window.location.assign(`/form/form.html?id=${productId}`);
@@ -46,6 +69,10 @@ const ajouterEvenements = (container) => {
   });
   supprimerBtn.forEach((boutton) => {
     boutton.addEventListener("click", async (event) => {
+      if (!estAdmin) {
+        return Alert.attention("Action réservée à l'administrateur.");
+      }
+
       const target = event.currentTarget;
       try {
         const confirm = await Alert.confirm(
@@ -57,9 +84,7 @@ const ajouterEvenements = (container) => {
           const productId = target.dataset.id;
           const response = await fetch(
             `${env.BACKEND_PRODUCTS_URL}/${productId}`,
-            {
-              method: "DELETE",
-            }
+            { method: "DELETE" }
           );
           const body = await response.json();
           const carteProduit = divSupprime(".carte");
@@ -70,7 +95,28 @@ const ajouterEvenements = (container) => {
       }
     });
   });
+
+  const ajouterBtn = container.querySelectorAll(".carte-btn-ajouter");
+  ajouterBtn.forEach((bouton) => {
+    bouton.addEventListener("click", () => {
+      const produit = {
+        id: bouton.dataset.id,
+        nom: bouton.dataset.nom,
+        prix: bouton.dataset.prix,
+        image: bouton.dataset.image,
+        description: bouton.dataset.description,
+      };
+
+      // On ajoute dans le localStorage
+      let panier = JSON.parse(localStorage.getItem("panier")) || [];
+      panier.push(produit);
+      localStorage.setItem("panier", JSON.stringify(panier));
+
+      Alert.succes(`${produit.nom} ajouté au panier.`);
+    });
+  });
 };
+
 const fetchProduits = async () => {
   try {
     const response = await fetch(`${env.BACKEND_PRODUCTS_URL}`);

@@ -15,25 +15,47 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const dataFormulaire = new FormData(form);
   const nvUtilisateur = Object.fromEntries(dataFormulaire.entries());
+  nvUtilisateur.role = "utilisateur";
+  console.log(nvUtilisateur); // ← AJOUT
+
+  if (!nvUtilisateur.login || !nvUtilisateur.password || !nvUtilisateur.nom || !nvUtilisateur.email) {
+    alert("Les champs login, mot de passe, nom et email sont requis.");
+    return;
+  }
+
+  if (!env.BACKEND_USERS_URL) {
+    console.error("L'URL de l'API utilisateur est undefined !");
+    alert("Erreur de configuration : l'URL de l'API utilisateur est manquante.");
+    return;
+  }
 
   if (validationFormulaire(nvUtilisateur)) {
     const json = JSON.stringify(nvUtilisateur);
     console.log("json :", json);
-    console.log(env.BACKEND_LOGIN_URL);
+    console.log(env.BACKEND_USERS_URL);
     let response;
-    response = await fetch(`${env.BACKEND_LOGIN_URL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: json,
-    });
-    if (response.status < 300) {
-      // Si la réponse est correcte, on transforme la réponse en JSON
-      // et on redirige l'utilisateur vers la page d'accueil.
-      const utilisateur = await response.json();
-      localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
-      window.location.assign("./index.html");
+    try {
+      response = await fetch(env.BACKEND_USERS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: json,
+      });
+
+      if (response.status < 300) {
+        alert("Inscription réussie !");
+        // Si la réponse est correcte, on transforme la réponse en JSON
+        // et on redirige l'utilisateur vers la page d'accueil.
+        const utilisateur = await response.json();
+        localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+        window.location.assign("./index.html");
+      } else {
+        const errorData = await response.json();
+        alert("Erreur : " + (errorData.error || "Requête invalide"));
+      }
+    } catch (error) {
+      alert("Erreur de communication avec le serveur : " + error.message);
     }
   }
 });
@@ -41,7 +63,7 @@ form.addEventListener("submit", async (event) => {
 function validationPass(password) {
   // Tester la présence d'un password
   if (!password) {
-    return "le mot de passe est obligatoire pour se connecter.";
+    return "Le mot de passe est obligatoire pour s’inscrire.";
   }
 
   // valider si un prix est valide comme chiffre:
@@ -69,8 +91,8 @@ function validationLogin(login) {
 
 const validationFormulaire = (utilisateur) => {
   erreurs = [];
-  if (!utilisateur.login || !utilisateur.password || !utilisateur.password2) {
-    utilisateur.push("Tous les champs sont obligatoires.");
+  if (!utilisateur.login || !utilisateur.password || !utilisateur.nom || !utilisateur.email) {
+    erreurs.push("Tous les champs sont obligatoires.");
   }
   let validlogin = validationLogin(utilisateur.login);
   if (utilisateur.login && validlogin !== true) {
@@ -79,12 +101,6 @@ const validationFormulaire = (utilisateur) => {
   let validPwd = validationPass(utilisateur.password);
   if (utilisateur.password && validPwd !== true) {
     erreurs.push(validPwd);
-  }
-
-  if (utilisateur.password2 && utilisateur.password2 !== utilisateur.password) {
-    erreurs.push(
-      "La confirmation du mot de passe ne correspond pas au mot de passe."
-    );
   }
 
   if (erreurs.length) {

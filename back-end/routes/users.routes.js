@@ -1,4 +1,5 @@
 import express from "express";
+
 const router = express.Router();
 
 import {
@@ -8,10 +9,14 @@ import {
   mettreAJourUtilisateur,
   supprimerUtilisateur,
   rechercheUtilisateurAvEmail,
+  authentifierUtilisateur,
 } from "../controllers/user.controllers.js";
 
 // requête POST / - Créer un nouvel utilisateur
 router.post("/", creerUtilisateur);
+
+// requête POST /authentification - Authentifier un utilisateur
+router.post("/authentification", authentifierUtilisateur);
 
 // requête GET / - Pour lister tous les utilisateurs
 router.get("/", listeUtilisateurs);

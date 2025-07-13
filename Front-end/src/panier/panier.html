@@ -10,8 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <script type="module" src="authentification.js"></script>
-    <title>Smartphooool</title>
+    <script type="module" src="./panier.js"></script>
   </head>
   <body>
     <div class="container">
@@ -28,47 +27,40 @@
             <a href="../index.html" class="nav-titre">Accueil</a>
           </li>
           <li>
-            <a href="../produit/produit.html" class="nav-titre">Nos Produits</a>
+            <a href="./produit.html" class="nav-titre active">Nos Produits</a>
           </li>
           <li>
             <a href="../form/form.html" class="nav-titre">Ajouter un produit</a>
           </li>
           <li>
-            <a href="./authentication.html" class="nav-titre active"
+            <a href="../connect/authentication.html" class="nav-titre"
               >Se connecter</a
             >
           </li>
           <li>
-            <a href="./connection.html" class="nav-titre">S'enregister</a>
+            <a href="../connect/connection.html" class="nav-titre"
+              >S'enregister</a
+            >
           </li>
-          <li><a href="../panier/panier.html"  class="nav-titre">Mon Panier</a></li>
+          <li>
+            <a href="../panier/panier.html" class="nav-titre active"
+              >Mon Panier</a
+            >
+          </li>
         </ul>
       </header>
-      <div class="content">
-        <form class="form">
-          <h2 class="title-form">Connexion à votre compte</h2>
-          <div class="form-group">
-            <label for="nom">Login</label>
-            <input
-              type="text"
-              name="login"
-              id="login"
-              minlength="2"
-              maxlength="15"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" name="password" id="password" />
-          </div>
 
-          <ul class="erreur-text" id="erreurs"></ul>
-          <div class="form-btn-container">
-            <button class="btn btn-secondary" type="button" onclick="history.back()">Annuler</button>
-            <button class="btn btn-primary" type="submit">Se connecter</button>
-          </div>
-        </form>
-      </div>
+      <main class="panier-main">
+        <section class="panier-flex" id="panier-content">
+          <!-- Les cartes produits JS seront injectées ici -->
+        </section>
+        <div class="panier-actions">
+          <button id="vider-panier" class="panier-btn-vider">
+            🗑️ Vider le panier
+          </button>
+        </div>
+      </main>
+
       <footer>
         © Smartphooool est une marque local enregistré au Québec, tout droit
         réservé.

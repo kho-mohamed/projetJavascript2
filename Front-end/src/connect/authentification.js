@@ -1,69 +1,82 @@
 import "../assets/styles/styles.scss";
-// Importation des données des utilisateurs
-import { users } from "../../data/users.js";
-
-// variables:
 
 const form = document.querySelector(".form");
 const baliseErreurs = document.querySelector("#erreurs");
 let erreurs = [];
 
-// Écouteur d'événement pour le formulaire
-// Lorsque le formulaire est soumis, on empêche le comportement par défaut (rechargement de la page)
-// et on récupère les données du formulaire pour les valider.
-
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+
   const dataFormulaire = new FormData(form);
-  const login = Object.fromEntries(dataFormulaire.entries());
-  if (validationFormulaire(login)) {
-    //Si le formulaire est valide, on renvoie vers la page de produit via le routeur qui sera créer ultérieurement.
-    alert("Connexion réussie !");
+  const { login, password } = Object.fromEntries(dataFormulaire.entries());
+
+  console.log("🔐 Tentative de connexion avec:", {
+    login,
+    password: "***masqué***",
+  });
+
+  erreurs = [];
+
+  if (!login || !password) {
+    erreurs.push("Tous les champs sont obligatoires.");
+    afficherErreurs(erreurs);
+    return;
+  }
+
+  try {
+    console.log("📡 Envoi de la requête d'authentification...");
+    const response = await fetch(
+      "http://localhost:5252/utilisateur/authentification",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ login, password }),
+      }
+    );
+
+    console.log("📨 Réponse reçue:", response.status, response.statusText);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log("❌ Erreur d'authentification:", errorData);
+
+      if (response.status === 401) {
+        erreurs.push("Login ou mot de passe invalide.");
+      } else {
+        erreurs.push(
+          "Erreur de connexion: " +
+            (errorData.message || errorData.error || "Erreur inconnue")
+        );
+      }
+      afficherErreurs(erreurs);
+      return;
+    }
+
+    const utilisateur = await response.json();
+    console.log("✅ Connexion réussie pour:", utilisateur);
+
+    localStorage.setItem("utilisateur", JSON.stringify(utilisateur));
+    alert(`Connexion réussie ! Bienvenue ${utilisateur.nom}`);
+
+    // Redirection selon le rôle de l'utilisateur
+    if (utilisateur.role === "admin") {
+      window.location.href = "../index.html"; // ou vers une page admin
+    } else {
+      window.location.href = "../index.html"; // page d'accueil
+    }
+  } catch (error) {
+    console.error("💥 Erreur réseau:", error);
+    erreurs.push("Erreur réseau ou serveur. Vérifiez votre connexion.");
+    afficherErreurs(erreurs);
   }
 });
 
-function validationConnection(userlog) {
-  // Tester la présence d'un login et password
-  if (!userlog.login) {
-    return "le login est obligatoire pour se connecter.";
-  }
-  if (!userlog.password) {
-    return "le mot de passe est obligatoire pour se connecter.";
-  }
-  // on compare le mot de passe avec l'objet users pour vérifier si le mot de passe existe déjà
-  const userExists = users.find((user) => user.login === userlog.login);
-
-  if (userExists) {
-    if (userExists.password != userlog.password) {
-      return "Les informations de connection sont incorrectes. Veuillez vérifier votre login et mot de passe.";
-    }
-  }
-  if (!userExists) {
-    return "Aucun utilisateur trouvé avec ce login.";
-  }
-
-  return true;
+function afficherErreurs(erreurs) {
+  let erreursHTML = "";
+  erreurs.forEach((erreur) => {
+    erreursHTML += `<li>${erreur}</li>`;
+  });
+  baliseErreurs.innerHTML = erreursHTML;
 }
-
-const validationFormulaire = (utilisateur) => {
-  erreurs = [];
-  if (!utilisateur.login || !utilisateur.password) {
-    erreurs.push("Tous les champs sont obligatoires.");
-  }
-  let validConnect = validationConnection(utilisateur);
-  if (validConnect !== true) {
-    erreurs.push(validConnect);
-  }
-
-  if (erreurs.length) {
-    let erreursHTML = "";
-    erreurs.forEach((erreur) => {
-      erreursHTML += `<li>${erreur}</li>`;
-    });
-    baliseErreurs.innerHTML = erreursHTML;
-    return false;
-  } else {
-    baliseErreurs.innerHTML = "";
-    return true;
-  }
-};
